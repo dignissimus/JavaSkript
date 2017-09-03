@@ -1,0 +1,8 @@
+name: JavaSkript
+version: 1.0
+description: JavaSkript Interpreter
+author: spammy23
+authors: [spammy23]
+website: ezeh.me
+
+main: me.ezeh.language.JavaSkript
