@@ -4,7 +4,7 @@
 
 > JavaSkript provides a simple way for you to access the Bukkit api through JavaScript
 
-## Code Samples
+## Usage
 
 First you must register your plugin, the `pluginManager.register` method works like a plugin.yml, here your plugin's name, commands, description, and many other variables declared in the plugin.yml of a regular plugin. the `plugin` variable is an instance of your JS plugin.
 ```javascript
