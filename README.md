@@ -45,4 +45,4 @@ with(bukkit) {
 
 ## Installation
 
-> To install, place the JavaSkript.jar archive in your plugins folder and insert your JS plugins in the plugins/JavaSkript folder created on the first run
+> To install, place the JavaSkript.jar archive in your plugins folder and insert your JS plugins in the `plugins/JavaSkript` directory created on the first run
