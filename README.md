@@ -25,11 +25,11 @@ To register a command, you use the `pluginManager.registerCommand` method which 
 `pluginManager.registerCommand(plugin, name, description, usage, commandFunction/*, aliases*/)`
 ```javascript
 with(bukkit) {
-    pluginManager.registerCommand(plugin, "test", "An example command", "/test",
+    pluginManager.registerCommand(plugin, "test", ["alias1", "alias2"], "An example command", "/test",
         function(sender, command, args){ //optional alias argument
             sender.sendMessage("I have received your command: " + command.getName())
             return true
-    }, ["alias1", "alias2"]) // The array of aliases is optional
+    }) // The array of aliases is optional
 }
 ```
 While registering events, you use the`pluginManager.registerEvent` method, this takes two variables, the first being the handler and the second being the class for the event you are listeneing to 
