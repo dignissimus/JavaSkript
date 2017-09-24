@@ -21,8 +21,8 @@ pluginManager.register({
 }, plugin);
 ```
 All code including the bukkit API is in the single variable `bukkit`, it's usually easier to wrap your code with `with(bukkit)`.
-To register a command, you use the `pluginManager.registerCommand` method which takes 6/7 arguments.  The first being your `plugin` instance, the second being the name of the command, the third being description, fifth being the usage, the sixth being the function that executes the command and the optional seventh being an array of aliases.
-`pluginManager.registerCommand(plugin, name, description, usage, commandFunction/*, aliases*/)`
+To register a command, you use the `pluginManager.registerCommand` method which takes 5/6 arguments.  The first being your `plugin` instance, the second being the name of the command, the third being an optional list of aliases, the fourth being description, fifth being the usage, and the sixth being the function that executes the command.
+`pluginManager.registerCommand(plugin, name, description, usage, commandFunction)`
 ```javascript
 with(bukkit) {
     pluginManager.registerCommand(plugin, "test", ["alias1", "alias2"], "An example command", "/test",
