@@ -6,11 +6,9 @@ class JS {
     companion object {
         val registered = ArrayList<JS>()
         @JvmStatic
-        var pluginManager: PluginManager = PluginManager()
+        var pluginManager = JavaSkriptPluginManager()
         private var last = 0
     }
-
-
 
 
     fun debug(obj: ScriptObjectMirror) {

@@ -38,7 +38,7 @@ class JavaSkript : JavaPlugin() {
 
     override fun onEnable() {
         val cl = this::class.java.classLoader
-        Thread.currentThread().contextClassLoader = cl //This practically make nashorn work while accessing my classes
+        Thread.currentThread().contextClassLoader = cl //This practically makes Nashorn work while accessing my classes
 
 
         getSkripts().map {
@@ -55,9 +55,12 @@ class JavaSkript : JavaPlugin() {
 
     }
 
+    override fun onDisable() {
+        for ((plugin) in JS.pluginManager.plugins) {
+            // TODO: onDisable
+        }
+    }
     private fun addSkriptsToPluginList() {
-        //you'll also wanna populate the lookupNames map with the name of your plugin against the Plugin instance, noting that, getPlugin does this: name.replace(' ', '_').toLowerCase(java.util.Locale.ENGLISH)
-        // This mess of code adds my plugins to the plugin list
         val pluginManager = Bukkit.getPluginManager()
 
         val pluginsField = Bukkit.getPluginManager()::class.java.getDeclaredField("plugins")
@@ -74,12 +77,12 @@ class JavaSkript : JavaPlugin() {
 
         JS.pluginManager.plugins.map {
             val jsInstance = it.key
-            val plugin = JavaSkriptPlugin(it.key, it.value)
+            val plugin = JavaSkriptPlugin(it.key, it.value, dataFolder)
 
             plugins.add(plugin)
             lookupNames.put(plugin.name, plugin)
 
-            for ((command/*, jsInstance*/) in JS.pluginManager.registeredCommands.filter { it.value == jsInstance }) // This thing loops through the registered commands and registers it to the command map using the plugin instance
+            for ((command) in JS.pluginManager.registeredCommands.filter { it.value == jsInstance }) // This thing loops through the registered commands and registers it to the command map using the plugin instance
                 commandMap.register((it.value["name"] as String).toLowerCase(), command)
         }
 

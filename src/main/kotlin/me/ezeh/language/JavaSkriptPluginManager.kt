@@ -7,7 +7,8 @@ import org.bukkit.command.CommandSender
 import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-class PluginManager : Listener {
+
+class JavaSkriptPluginManager : Listener/*, PluginManager */ {
     val plugins = HashMap<JS, ScriptObjectMirror>() // create details class
     val registeredEvents = HashMap<EventListener, Class<Event>>()
     val registeredCommands = HashMap<Command, JS>()
@@ -41,14 +42,14 @@ class PluginManager : Listener {
 
     fun registerCommand(plugin: JS, name: String, aliases: Array<String>, description: String, usage: String, runner: CommandRunner) {
         registeredCommands.put(object : Command(name, description, usage, ArrayList(aliases.asList())) {
-            override fun execute(sender: CommandSender, alias: String, args: Array<String>): Boolean {
-                return runner.onCommand(sender, this, args, alias)
-            }
+            override fun execute(sender: CommandSender, alias: String, args: Array<String>): Boolean =
+                    runner.onCommand(sender, this, args, alias)
 
         }, plugin)
     }
-    fun registerCommand(plugin: JS, name: String, description: String, usage: String, runner: CommandRunner){ // I'm not using Kotlin default params due to nashorn not liking them therefore this method must exist
-        registerCommand(plugin, name, emptyArray<String>(), description, usage, runner)
+
+    fun registerCommand(plugin: JS, name: String, description: String, usage: String, runner: CommandRunner) { // I'm not using Kotlin default params due to Nashorn not liking them therefore this method must exist
+        registerCommand(plugin, name, emptyArray(), description, usage, runner)
     }
 
     fun registerCommand(plugin: JS, name: String, runner: CommandRunner) {

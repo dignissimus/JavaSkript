@@ -2,11 +2,11 @@ package me.ezeh.language
 
 import javax.script.Invocable
 import javax.script.ScriptEngineManager
-import org.bukkit.*;
+import org.bukkit.*
 
 class JavaSkriptExecutor {
-    val engine = ScriptEngineManager().getEngineByName("nashorn") ?: throw Exception("Unable to get the required JS engine")
-    val invocable = engine as Invocable
+    private val engine = ScriptEngineManager().getEngineByName("nashorn") ?: throw Exception("Unable to get the required JS engine")
+    private val invocable = engine as Invocable
 
     init {
         javaClass.classLoader.loadClass("org.bukkit.Bukkit")

@@ -9,14 +9,16 @@ pluginManager.register({
     },
     authors: ["spammy23"]
 }, plugin);
-pluginManager.debug(this)
+
+pluginManager.debug(this);
+
 with(bukkit){
     pluginManager.registerCommand(plugin, "test", "An example command", "/test",
     function(sender, command, args){ //optional alias argument
-        sender.sendMessage("I have received your command: " + command.getName())
+        sender.sendMessage("I have received your command: " + command.getName());
         return true
-    }) //optional alias array
-    Bukkit.broadcastMessage("This should work") // it did work!
+    }); //optional alias array
+    Bukkit.broadcastMessage("This should work"); // it did work!
     pluginManager.registerEvent(
         function(event){
             print("command: "+event.getCommand());

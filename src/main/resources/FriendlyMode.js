@@ -8,52 +8,52 @@ pluginManager.register({
         }
     },
     authors: ["spammy23"]
-}, plugin)
+}, plugin);
 
-states = {}
+states = {};
 
 function orDefault(value, fallback) {
-    return value == undefined ? fallback : value
+    return value === undefined ? fallback : value
 }
 with(bukkit) {
     pluginManager.registerCommand(plugin, "friendly", ["f"],
         "Friendly mode main command", "/friendly toggle, /friendly [on/off] <player>, /friendly reload",
         function (sender, command, args) {
             if (!(sender instanceof Player)) {
-                sender.sendMessage("You must be a player to execute this command")
+                sender.sendMessage("You must be a player to execute this command");
                 return true
             }
 
             switch (args[0].toLowerCase()) {
             case "toggle":
                 if (sender.hasPermission("friendly.toggle")) {
-                    player.sendMessage("Friendly Mode: " + value)
+                    player.sendMessage("Friendly Mode: " + value);
                     isEnabled = state[sender.getName()].toLowerCase()
                 }
-                break
+                break;
             case "on":
                 if (player.hasPermission("friendly.on")) {
                     states[args[1]] = true
                 }
-                break
+                break;
             case "off":
                 if (player.hasPermission("friendly.off")) {
                     states[args[1]] = false
                 }
-                break
+                break;
             default:
-                sender.sendMessage("Please enter a valid argument")
+                sender.sendMessage("Please enter a valid argument");
                 return false
             }
             return true
         }
-    )
+    );
     pluginManager.registerEvent(function (event) {
         event.setKeepInventory(orDefault(states[event.getPlayer().getName()], false))
-    }, PlayerDeathEvent)
+    }, PlayerDeathEvent);
     pluginManager.registerEvent(function (event) {
-        event.setKeepInventory(orDefault(states[event.get]))
-        damage = event.getDamage()
+        event.setKeepInventory(orDefault(states[event.get]));
+        damage = event.getDamage();
         if (!(event.getDamager() instanceof Player && event.getEntity() instanceof Player)) {
             return
         }
@@ -62,7 +62,7 @@ with(bukkit) {
             event.setCancelled(true)
         }
         if (orDefault(states[event.getDamager().getName()], false)) {
-            event.getDamager().sendMessage("You Have Friendly Mode ON: You cannot Attack Others")
+            event.getDamager().sendMessage("You Have Friendly Mode ON: You cannot Attack Others");
             event.setCancelled(true)
         }
     }, EntityDamageByEntityEvent)
